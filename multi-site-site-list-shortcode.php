@@ -3,9 +3,9 @@
 	Plugin Name: Multi-Site Site List Shortcode
 	Plugin URI: http://bit51.com/software/multi-site-site-list-shortcode/
 	Description: Displays the site list with a shortcode for network installations.
-	Version: 5.4
+	Version: Dev
 	Domain Path: /languages
-	Author: Bit51.com
+	Author: Bit51
 	Author URI: http://bit51.com
 	License: GPLv2
 	Copyright 2012  Bit51.com  (email : info@bit51.com)

@@ -4,8 +4,8 @@ Contributors: Bit51
 Donate link: http://bit51.com/software/multi-site-site-list-shortcode/
 Tags: Multisite, index, site list
 Requires at least: 3.0
-Tested up to: 3.4
-Stable tag: 5.4
+Tested up to: 3.5.1
+Stable tag: 5.4.1
 
 
 == License ==  
@@ -31,6 +31,9 @@ Makes displaying a list of all the sites on a multi-site installation easy by us
 
 
 == Changelog ==
+
+= 5.4.1 =
+* Fixed Bit51 feed with improved error handling
 
 = 5.4 =
 * Added Hindi translation by Love Chandel of http://outshinesolutions.com/

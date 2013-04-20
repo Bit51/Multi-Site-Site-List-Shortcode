@@ -10,7 +10,7 @@ if ( ! class_exists( 'Bit51' ) ) {
 
 	abstract class Bit51 {
 	
-		var $feed = 'http://feeds.feedburner.com/Bit51'; //current address of Bit51.com feed
+		var $feed = 'http://bit51.com/feed'; //current address of Bit51.com feed
 	
 		/**
 		 * Register admin javascripts (only for plugin admin page)
@@ -43,7 +43,7 @@ if ( ! class_exists( 'Bit51' ) ) {
 				wp_enqueue_style( 'thickbox' );
 				wp_enqueue_style( 'global' );
 				wp_enqueue_style( 'wp-admin' );
-				wp_enqueue_style( 'bit51-css', plugin_dir_url( __FILE__ ). 'bit51.css' );
+				wp_enqueue_style( 'bit51-css', plugin_dir_url( $this->pluginbase, __FILE__ ). 'lib/bit51/bit51.css' );
 				
 			}
 			
@@ -240,6 +240,25 @@ if ( ! class_exists( 'Bit51' ) ) {
 			</div>
 			<?php
 		}
+
+		function admin_tabs( $tabs, $current = NULL, $page = true ) {
+			if ( $current == NULL ) {
+				$current = $this->hook;
+			}
+			$tabs = $tabs;
+			echo '<div id="icon-themes" class="icon32"><br></div>';
+			echo '<h2 class="nav-tab-wrapper">';
+			foreach( $tabs as $location => $tabname ){
+				if ( is_array( $tabname ) ) {
+					$class = ( $location == $current ) ? ' nav-tab-active' : '';
+					echo '<a class="nav-tab' . $class. '" href="?page=' . $tabname[1] . '&tab='. $location . '">' . $tabname[0] . '</a>';
+				} else {
+					$class = ( $location == $current ) ? ' nav-tab-active' : '';
+					echo '<a class="nav-tab' . $class. '" href="?page=' . $location . '">' . $tabname . '</a>';
+				}
+			}
+			echo '</h2>';
+		}
 		
 		/**
 		 * Setup main admin page box
@@ -249,17 +268,35 @@ if ( ! class_exists( 'Bit51' ) ) {
 		 * @param string $title Title of page to display to user
 		 * @param object $boxes array of primary content boxes in postbox form
 		 * @param string $icon[optional] icon file to display
+		 * @param object $tabs[optional] array of tabs to display
+		 * @param boolean $page[optional] true if stand-alone page, false otherwise
 		 *
 		 **/
-		function admin_page( $title, $boxes, $icon = '' ) {
+		function admin_page( $title, $boxes, $icon = '', $tabs = NULL, $page = true ) {
+
+			if ( ( $page != true && !isset( $_GET['tab'] ) ) || ( $page == true && isset( $_GET['tab'] ) ) ) {
+				return;
+			}
+
 			?>
 				<div class="wrap">
 					<?php if ( $icon == '' ) { ?>
-						<a href="http://bit51.com/"><div id="bit51-icon" style="background: url(<?php echo plugin_dir_url( __FILE__ ); ?>images/bit51.png) no-repeat;" class="icon32"><br /></div></a>
+						<a href="http://bit51.com/"><div id="bit51-icon" style="background: url(<?php echo plugin_dir_url( $this->pluginbase, __FILE__ ); ?>lib/bit51/images/bit51.png) no-repeat;" class="icon32"><br /></div></a>
 					<?php } else { ?>
 						<a href="http://bit51.com/"><div id="bit51-icon" style="background: url(<?php echo $icon; ?>) no-repeat;" class="icon32"><br /></div></a>
 					<?php } ?>
 					<h2><?php _e( $title, $this->hook ) ?></h2>
+					<?php 
+						if ( $tabs != NULL ) {
+							if ( isset ( $_GET['tab'] ) ) {
+								$this->admin_tabs( $tabs, filter_var( $_GET['tab'], FILTER_SANITIZE_STRING ), false ); 
+							} elseif( isset( $_GET['page'] ) ) {
+								$this->admin_tabs( $tabs, filter_var( $_GET['page'], FILTER_SANITIZE_STRING ) ); 
+							} else { 
+								$this->admin_tabs( $tabs ); 
+							}
+						}
+					?>
 					<div class="postbox-container" style="width:65%;">
 						<div class="metabox-holder">	
 							<div class="meta-box-sortables">
@@ -312,28 +349,34 @@ if ( ! class_exists( 'Bit51' ) ) {
 			include_once( ABSPATH . WPINC . '/feed.php' ); //load WordPress feed info
 			
 			$feed = fetch_feed( $this->feed ); //get the feed
+
+			if ( ! isset( $feed->errors ) ) {
+
+				$feeditems = $feed->get_items( 0, $feed->get_item_quantity( 5 ) ); //narrow feed to last 5 items
 			
-			$feeditems = $feed->get_items( 0, $feed->get_item_quantity( 5 ) ); //narrow feed to last 5 items
+				$content = '<ul>'; //start list
 			
-			$content = '<ul>'; //start list
+				if ( ! $feeditems ) {
 			
-			if ( ! $feeditems ) {
-			
-			    $content .= '<li class="bit51">' . __( 'No news items, feed might be broken...', $this->hook ) . '</li>';
+			    	$content .= '<li class="bit51">' . __( 'No news items, feed might be broken...', $this->hook ) . '</li>';
 			    
-			} else {
+				} else {
 			
-				foreach ( $feeditems as $item ) {
+					foreach ( $feeditems as $item ) {
+						
+						$url = preg_replace( '/#.*/', '', esc_url( $item->get_permalink(), $protocolls = null, 'display' ) );
+						
+						$content .= '<li class="bit51"><a class="rsswidget" href="' . $url . '" target="_blank">'. esc_html( $item->get_title() ) .'</a></li>';
+						
+					}
 					
-					$url = preg_replace( '/#.*/', '', esc_url( $item->get_permalink(), $protocolls = null, 'display' ) );
-					
-					$content .= '<li class="bit51"><a class="rsswidget" href="' . $url . '" target="_blank">'. esc_html( $item->get_title() ) .'</a></li>';
-					
-				}
-				
-			}	
-								
-			$content .= '</ul>'; //end list
+				}	
+									
+				$content .= '</ul>'; //end list
+
+			} else {
+				$content = __( 'It appears as if the feed is currently down. Please try again later', $this->hook );
+			}
 			
 			$this->postbox( 'bit51posts' , __( 'The Latest from Bit51', $this->hook ), $content ); //set up postbox
 			
@@ -347,7 +390,7 @@ if ( ! class_exists( 'Bit51' ) ) {
 		 **/
 		function donate() {
 		
-			$content = __( 'Have you found this plugin useful? Please help support it\'s continued development with a donation of $20, $50, or $100!', $this->hook );
+			$content = __( 'Have you found this plugin useful? Please help support it\'s continued development with a donation of $20, $50, or even $100.', $this->hook );
 			
 			$content .= '<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="' . $this->paypalcode . '"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"></form>';
 			
@@ -381,7 +424,7 @@ if ( ! class_exists( 'Bit51' ) ) {
 			
 			$content .= '<li class="twitter"><a href="http://twitter.com/Bit51" target="_blank">' . __( 'Follow Bit51 on Twitter', $this->hook ) . '</a></li>';
 			
-			$content .= '<li class="google"><a href="https://plus.google.com/104513012839087985497" target="_blank">' . __( 'Find Bit51 on Google+', $this->hook ) . '</a></li>';
+			$content .= '<li class="google"><a href="https://plus.google.com/104513012839087985497" target="_blank">' . __( 'Circle Bit51 on Google+', $this->hook ) . '</a></li>';
 			
 			$content .= '<li class="subscribe"><a href="http://bit51.com/subscribe" target="_blank">' . __( 'Subscribe with RSS or Email', $this->hook ) . '</a></li>';
 			
@@ -416,7 +459,7 @@ if ( ! class_exists( 'Bit51' ) ) {
 			$plugopts = $this->plugin_options_url();
 			
 			//display the notifcation if they haven't turned it off and they've been using the plugin at least 30 days
-			if ( ! isset( $options['no-nag'] ) && $options['activatestamp'] < ( time() - 2952000 ) ) {
+			if ( ! isset( $options['no-nag'] ) && $options['activatestamp'] < ( current_time( 'timestamp' ) - 2952000 ) ) {
 			
 				if ( ! function_exists( 'bit51_plugin_donate_notice' ) ) {
 			
