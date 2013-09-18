@@ -3,7 +3,7 @@
 	Plugin Name: Multi-Site Site List Shortcode
 	Plugin URI: http://bit51.com/software/multi-site-site-list-shortcode/
 	Description: Displays the site list with a shortcode for network installations.
-	Version: Dev
+	Version: 5.4.2
 	Domain Path: /languages
 	Author: Bit51
 	Author URI: http://bit51.com
@@ -21,7 +21,7 @@ if ( !class_exists( 'bit51_mssls' ) ) {
 
 	class bit51_mssls extends Bit51 {
 
-		public $pluginversion = '5.4.1'; //current plugin version
+		public $pluginversion = '5.4.2'; //current plugin version
 
 		//important plugin information
 		public $hook = 'multi_site_site_list_shortcode';
