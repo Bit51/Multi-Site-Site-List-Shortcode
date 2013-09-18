@@ -1,6 +1,6 @@
 
 === Multi-Site Site List Shortcode ===
-Contributors: Bit51
+Contributors: Bit51, ChrisWiegman
 Donate link: http://bit51.com/software/multi-site-site-list-shortcode/
 Tags: Multisite, index, site list
 Requires at least: 3.0
@@ -33,10 +33,11 @@ Makes displaying a list of all the sites on a multi-site installation easy by us
 == Changelog ==
 
 = Dev =
-* Remove pass by reference
+* Remove pass by reference (should now work with PHP 5.4)
 * Reformat for better WordPress code standards
 * Stop using dynamic text domain
 * Works with WordPress 3.6.1
+* Updated .pot file
 
 = 5.4.1 =
 * Fixed Bit51 feed with improved error handling
