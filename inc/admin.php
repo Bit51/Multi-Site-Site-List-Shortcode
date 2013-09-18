@@ -35,7 +35,7 @@ if ( !class_exists( 'mssls_admin' ) ) {
 		 * Register page settings
 		 */
 		function register_settings_page() {
-			add_options_page( __( $this->pluginname, $this->hook ), __( $this->pluginname, $this->hook ), $this->accesslvl, $this->hook, array( $this, 'mssls_admin_init' ) );
+			add_options_page( __( $this->pluginname, 'multi_site_site_list_shortcode' ), __( $this->pluginname, 'multi_site_site_list_shortcode' ), $this->accesslvl, 'multi_site_site_list_shortcode', array( $this, 'mssls_admin_init' ) );
 		}
 
 		/**
@@ -43,11 +43,11 @@ if ( !class_exists( 'mssls_admin' ) ) {
 		 * To add more boxes to the admin page add a 2nd inner array item with title and callback function or content
 		 */
 		function mssls_admin_init() {
-			$this->admin_page( $this->pluginname . ' ' . __( 'Options', $this->hook ),
+			$this->admin_page( $this->pluginname . ' ' . __( 'Options', 'multi_site_site_list_shortcode' ),
 				array(
-					array( __( 'Instructions', $this->hook ), 'install_instructions' ), //primary admin page content
-					array( __( 'General Options', $this->hook ), 'general_options' ), //primary admin page content
-					array( __( 'Exclude Sites', $this->hook ), 'exclude_options' ) //choose sites to be excluded from view
+					array( __( 'Instructions', 'multi_site_site_list_shortcode' ), 'install_instructions' ), //primary admin page content
+					array( __( 'General Options', 'multi_site_site_list_shortcode' ), 'general_options' ), //primary admin page content
+					array( __( 'Exclude Sites', 'multi_site_site_list_shortcode' ), 'exclude_options' ) //choose sites to be excluded from view
 				)
 			);
 		}
@@ -57,15 +57,15 @@ if ( !class_exists( 'mssls_admin' ) ) {
 		 */
 		function install_instructions() {
 			?>
-			<p><?php echo __( 'Set your options below and then enter the shortcode', $this->hook ) . ' <strong><em>[site-list]</em></strong> ' . __( 'where you would like your site list to appear (you can even enter it in a text widget).', $this->hook ); ?></p>
-			<p><?php echo __( 'You can overwrite the settings below to make it easier to use the shortcode in multiple locations. Here are the options:', $this->hook ); ?></p>
+			<p><?php echo __( 'Set your options below and then enter the shortcode', 'multi_site_site_list_shortcode' ) . ' <strong><em>[site-list]</em></strong> ' . __( 'where you would like your site list to appear (you can even enter it in a text widget).', 'multi_site_site_list_shortcode' ); ?></p>
+			<p><?php echo __( 'You can overwrite the settings below to make it easier to use the shortcode in multiple locations. Here are the options:', 'multi_site_site_list_shortcode' ); ?></p>
 			<ul>
-				<li><?php echo __( 'sort: alpha for alphabetically (anything else will sort by created date).', $this->hook ); ?></li>
-				<li><?php echo __( 'limit: set a new limit (or 0 for no limit).', $this->hook ); ?></li>
-				<li><?php echo __( 'newwin: 1 to open links in a new window, 0 to open them in a current window.', $this->hook ); ?></li>
-				<li><?php echo __( 'showtag: 1 to show site description (tagline), 0 to hide it.', $this->hook ); ?></li>
+				<li><?php echo __( 'sort: alpha for alphabetically (anything else will sort by created date).', 'multi_site_site_list_shortcode' ); ?></li>
+				<li><?php echo __( 'limit: set a new limit (or 0 for no limit).', 'multi_site_site_list_shortcode' ); ?></li>
+				<li><?php echo __( 'newwin: 1 to open links in a new window, 0 to open them in a current window.', 'multi_site_site_list_shortcode' ); ?></li>
+				<li><?php echo __( 'showtag: 1 to show site description (tagline), 0 to hide it.', 'multi_site_site_list_shortcode' ); ?></li>
 			</ul>
-			<p><?php echo __( 'example: to sort alphabetically and show site descriptions you can overwrite the default options below using the following tag', $this->hook ); ?>
+			<p><?php echo __( 'example: to sort alphabetically and show site descriptions you can overwrite the default options below using the following tag', 'multi_site_site_list_shortcode' ); ?>
 				<br/><em><strong>[site-list sort=alpha showtag=1]</strong></em></p>
 		<?php
 		}
@@ -81,54 +81,54 @@ if ( !class_exists( 'mssls_admin' ) ) {
 				<table class="form-table">
 					<tr valign="top">
 						<th scope="row">
-							<label for "sortby"><?php _e( 'Sort By', $this->hook ); ?></label>
+							<label for "sortby"><?php _e( 'Sort By', 'multi_site_site_list_shortcode' ); ?></label>
 						</th>
 						<td>
 							<input name="bit51_mssls[sortby]" id="sortby" value="0"
-							       type="radio" <?php checked( '0', $options['sortby'] ); ?> /> <?php _e( 'Alphabetically', $this->hook ); ?>
+							       type="radio" <?php checked( '0', $options['sortby'] ); ?> /> <?php _e( 'Alphabetically', 'multi_site_site_list_shortcode' ); ?>
 							<br/>
 							<input name="bit51_mssls[sortby]" id="sortby" value="1"
-							       type="radio" <?php checked( '1', $options['sortby'] ); ?> /> <?php _e( 'Site Creation Date', $this->hook ); ?>
+							       type="radio" <?php checked( '1', $options['sortby'] ); ?> /> <?php _e( 'Site Creation Date', 'multi_site_site_list_shortcode' ); ?>
 						</td>
 					</tr>
 					<tr valign="top">
 						<th scope="row">
-							<label for "showtag"><?php _e( 'Show Taglines', $this->hook ); ?></label>
+							<label for "showtag"><?php _e( 'Show Taglines', 'multi_site_site_list_shortcode' ); ?></label>
 						</th>
 						<td>
 							<input name="bit51_mssls[showtag]" id="sortby" value="0"
-							       type="radio" <?php checked( '0', $options['showtag'] ); ?> /> <?php _e( 'No', $this->hook ); ?>
+							       type="radio" <?php checked( '0', $options['showtag'] ); ?> /> <?php _e( 'No', 'multi_site_site_list_shortcode' ); ?>
 							<br/>
 							<input name="bit51_mssls[showtag]" id="sortby" value="1"
-							       type="radio" <?php checked( '1', $options['showtag'] ); ?> /> <?php _e( 'Yes', $this->hook ); ?>
+							       type="radio" <?php checked( '1', $options['showtag'] ); ?> /> <?php _e( 'Yes', 'multi_site_site_list_shortcode' ); ?>
 						</td>
 					</tr>
 					<tr valign="top">
 						<th scope="row">
-							<label for "openin"><?php _e( 'Link Target', $this->hook ); ?></label>
+							<label for "openin"><?php _e( 'Link Target', 'multi_site_site_list_shortcode' ); ?></label>
 						</th>
 						<td>
 							<input name="bit51_mssls[openin]" id="openin" value="0"
-							       type="radio" <?php checked( '0', $options['openin'] ); ?> /> <?php _e( 'Same Window', $this->hook ); ?>
+							       type="radio" <?php checked( '0', $options['openin'] ); ?> /> <?php _e( 'Same Window', 'multi_site_site_list_shortcode' ); ?>
 							<br/>
 							<input name="bit51_mssls[openin]" id="openin" value="1"
-							       type="radio" <?php checked( '1', $options['openin'] ); ?> /> <?php _e( 'New Window', $this->hook ); ?>
+							       type="radio" <?php checked( '1', $options['openin'] ); ?> /> <?php _e( 'New Window', 'multi_site_site_list_shortcode' ); ?>
 						</td>
 					</tr>
 					<tr valign="top">
 						<th scope="row">
-							<label for "limit"><?php _e( 'Limit Output', $this->hook ); ?></label>
+							<label for "limit"><?php _e( 'Limit Output', 'multi_site_site_list_shortcode' ); ?></label>
 						</th>
 						<td>
 							<input name="bit51_mssls[limit]" id="limit" value="<?php echo $options['limit']; ?>"
 							       type="text"/> <br/>
 
-							<p><?php _e( 'Limit the number of sites displayed. This is useful if using the shortcode in a text widget. Set 0 for no limit.', $this->hook ); ?></p>
+							<p><?php _e( 'Limit the number of sites displayed. This is useful if using the shortcode in a text widget. Set 0 for no limit.', 'multi_site_site_list_shortcode' ); ?></p>
 						</td>
 					</tr>
 					<tr valign="top">
 						<th scope="row">
-							<label for "openin"><?php _e( 'Exclude Sites', $this->hook ); ?></label>
+							<label for "openin"><?php _e( 'Exclude Sites', 'multi_site_site_list_shortcode' ); ?></label>
 						</th>
 						<td>
 							<?php
@@ -169,7 +169,7 @@ if ( !class_exists( 'mssls_admin' ) ) {
 								}
 							}
 							?>
-							<p><?php _e( 'Put a checkmark below next to the sites you would like to remove from your site list.', $this->hook ); ?></p>
+							<p><?php _e( 'Put a checkmark below next to the sites you would like to remove from your site list.', 'multi_site_site_list_shortcode' ); ?></p>
 						</td>
 					</tr>
 				</table>

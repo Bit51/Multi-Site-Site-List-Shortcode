@@ -19,7 +19,7 @@ if ( !class_exists( 'Bit51' ) ) {
 		function config_page_scripts() {
 
 			//make sure we're on the appropriate page
-			if ( isset( $_GET['page'] ) && strpos( $_GET['page'], $this->hook ) !== false ) {
+			if ( isset( $_GET['page'] ) && strpos( $_GET['page'], 'multi_site_site_list_shortcode' ) !== false ) {
 
 				wp_enqueue_script( 'postbox' );
 				wp_enqueue_script( 'dashboard' );
@@ -37,7 +37,7 @@ if ( !class_exists( 'Bit51' ) ) {
 		function config_page_styles() {
 
 			//make sure we're on the appropriate page
-			if ( isset( $_GET['page'] ) && strpos( $_GET['page'], $this->hook ) !== false ) {
+			if ( isset( $_GET['page'] ) && strpos( $_GET['page'], 'multi_site_site_list_shortcode' ) !== false ) {
 
 				wp_enqueue_style( 'dashboard' );
 				wp_enqueue_style( 'thickbox' );
@@ -95,7 +95,7 @@ if ( !class_exists( 'Bit51' ) ) {
 			}
 
 			if ( $file == $this_plugin ) {
-				$settings_link = '<a href="' . $this->plugin_options_url() . '">' . __( 'Settings', $this->hook ) . '</a>';
+				$settings_link = '<a href="' . $this->plugin_options_url() . '">' . __( 'Settings', 'multi_site_site_list_shortcode' ) . '</a>';
 				array_unshift( $links, $settings_link );
 			}
 
@@ -110,7 +110,7 @@ if ( !class_exists( 'Bit51' ) ) {
 		 **/
 		function plugin_options_url() {
 
-			return admin_url( 'options-general.php?page=' . $this->hook );
+			return admin_url( 'options-general.php?page=' . 'multi_site_site_list_shortcode' );
 
 		}
 
@@ -293,7 +293,7 @@ if ( !class_exists( 'Bit51' ) ) {
 							<br/></div>
 					</a>
 				<?php } ?>
-				<h2><?php _e( $title, $this->hook ) ?></h2>
+				<h2><?php _e( $title, 'multi_site_site_list_shortcode' ) ?></h2>
 				<?php
 				if ( $tabs != NULL ) {
 					if ( isset ( $_GET['tab'] ) ) {
@@ -340,9 +340,9 @@ if ( !class_exists( 'Bit51' ) ) {
 		 **/
 		function support() {
 
-			$content = __( 'If you need help getting this plugin or have found a bug please visit the <a href="' . $this->supportpage . '" target="_blank">support forums</a>.', $this->hook );
+			$content = __( 'If you need help getting this plugin or have found a bug please visit the <a href="' . $this->supportpage . '" target="_blank">support forums</a>.', 'multi_site_site_list_shortcode' );
 
-			$this->postbox( 'bit51support', __( 'Need Help?', $this->hook ), $content ); //execute as postbox
+			$this->postbox( 'bit51support', __( 'Need Help?', 'multi_site_site_list_shortcode' ), $content ); //execute as postbox
 
 		}
 
@@ -366,7 +366,7 @@ if ( !class_exists( 'Bit51' ) ) {
 
 				if ( !$feeditems ) {
 
-					$content .= '<li class="bit51">' . __( 'No news items, feed might be broken...', $this->hook ) . '</li>';
+					$content .= '<li class="bit51">' . __( 'No news items, feed might be broken...', 'multi_site_site_list_shortcode' ) . '</li>';
 
 				} else {
 
@@ -383,10 +383,10 @@ if ( !class_exists( 'Bit51' ) ) {
 				$content .= '</ul>'; //end list
 
 			} else {
-				$content = __( 'It appears as if the feed is currently down. Please try again later', $this->hook );
+				$content = __( 'It appears as if the feed is currently down. Please try again later', 'multi_site_site_list_shortcode' );
 			}
 
-			$this->postbox( 'bit51posts', __( 'The Latest from Bit51', $this->hook ), $content ); //set up postbox
+			$this->postbox( 'bit51posts', __( 'The Latest from Bit51', 'multi_site_site_list_shortcode' ), $content ); //set up postbox
 
 		}
 
@@ -398,23 +398,23 @@ if ( !class_exists( 'Bit51' ) ) {
 		 **/
 		function donate() {
 
-			$content = __( 'Have you found this plugin useful? Please help support it\'s continued development with a donation of $20, $50, or even $100.', $this->hook );
+			$content = __( 'Have you found this plugin useful? Please help support it\'s continued development with a donation of $20, $50, or even $100.', 'multi_site_site_list_shortcode' );
 
 			$content .= '<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="' . $this->paypalcode . '"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"></form>';
 
-			$content .= '<p>' . __( 'Short on funds?', $this->hook ) . '</p>';
+			$content .= '<p>' . __( 'Short on funds?', 'multi_site_site_list_shortcode' ) . '</p>';
 
 			$content .= '<ul>';
 
-			$content .= '<li><a href="' . $this->wppage . '" target="_blank">' . __( 'Rate', $this->hook ) . ' ' . $this->pluginname . __( ' 5★\'s on WordPress.org', $this->hook ) . '</a></li>';
+			$content .= '<li><a href="' . $this->wppage . '" target="_blank">' . __( 'Rate', 'multi_site_site_list_shortcode' ) . ' ' . $this->pluginname . __( ' 5★\'s on WordPress.org', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
-			$content .= '<li>' . __( 'Talk about it on your site and link back to the ', $this->hook ) . '<a href="' . $this->homepage . '" target="_blank">' . __( 'plugin page.', $this->hook ) . '</a></li>';
+			$content .= '<li>' . __( 'Talk about it on your site and link back to the ', 'multi_site_site_list_shortcode' ) . '<a href="' . $this->homepage . '" target="_blank">' . __( 'plugin page.', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
-			$content .= '<li><a href="http://twitter.com/home?status=' . urlencode( 'I use ' . $this->pluginname . ' for WordPress by @bit51 and you should too - ' . $this->homepage ) . '" target="_blank">' . __( 'Tweet about it. ', $this->hook ) . '</a></li>';
+			$content .= '<li><a href="http://twitter.com/home?status=' . urlencode( 'I use ' . $this->pluginname . ' for WordPress by @bit51 and you should too - ' . $this->homepage ) . '" target="_blank">' . __( 'Tweet about it. ', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
 			$content .= '</ul>';
 
-			$this->postbox( 'donate', __( 'Support This Plugin', $this->hook ), $content ); //setup the postbox
+			$this->postbox( 'donate', __( 'Support This Plugin', 'multi_site_site_list_shortcode' ), $content ); //setup the postbox
 
 		}
 
@@ -428,17 +428,17 @@ if ( !class_exists( 'Bit51' ) ) {
 
 			$content = '<ul>';
 
-			$content .= '<li class="facebook"><a href="https://www.facebook.com/bit51" target="_blank">' . __( 'Like Bit51 on Facebook', $this->hook ) . '</a></li>';
+			$content .= '<li class="facebook"><a href="https://www.facebook.com/bit51" target="_blank">' . __( 'Like Bit51 on Facebook', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
-			$content .= '<li class="twitter"><a href="http://twitter.com/Bit51" target="_blank">' . __( 'Follow Bit51 on Twitter', $this->hook ) . '</a></li>';
+			$content .= '<li class="twitter"><a href="http://twitter.com/Bit51" target="_blank">' . __( 'Follow Bit51 on Twitter', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
-			$content .= '<li class="google"><a href="https://plus.google.com/104513012839087985497" target="_blank">' . __( 'Circle Bit51 on Google+', $this->hook ) . '</a></li>';
+			$content .= '<li class="google"><a href="https://plus.google.com/104513012839087985497" target="_blank">' . __( 'Circle Bit51 on Google+', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
-			$content .= '<li class="subscribe"><a href="http://bit51.com/subscribe" target="_blank">' . __( 'Subscribe with RSS or Email', $this->hook ) . '</a></li>';
+			$content .= '<li class="subscribe"><a href="http://bit51.com/subscribe" target="_blank">' . __( 'Subscribe with RSS or Email', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
 			$content .= '</ul>';
 
-			$this->postbox( 'bit51social', __( 'Bit51 on the Web', $this->hook ), $content ); //setup the postbox
+			$this->postbox( 'bit51social', __( 'Bit51 on the Web', 'multi_site_site_list_shortcode' ), $content ); //setup the postbox
 
 		}
 
