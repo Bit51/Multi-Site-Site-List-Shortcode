@@ -177,9 +177,9 @@ if ( !class_exists( 'bit51_mssls' ) ) {
 					}
 
 					if ( $sortby == 0 ) {
-						$output .= '<li><a href="' . $value['url'] . '"' . $target . '>' . $site . '</a>' . $desc . '</li>';
+						$output .= '<li><a href="' . $value['url'] . '"' . $target . '>' . html_entity_decode($site) . '</a>' . $desc . '</li>';
 					} else {
-						$output .= '<li><a href="' . $value['url'] . '"' . $target . '>' . $value['title'] . '</a>' . $desc . '</li>';
+						$output .= '<li><a href="' . $value['url'] . '"' . $target . '>' . html_entity_decode($value['title']) . '</a>' . $desc . '</li>';
 					}
 
 					$count++;
