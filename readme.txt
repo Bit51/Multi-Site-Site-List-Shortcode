@@ -13,7 +13,7 @@ Released under the terms of the GNU General Public License.
 
 == Description ==
 
-Adds a shortcode allowing multisite users to display a list of all the sites in the current installation. Sites can be sorted alphabetically or by site creation date and individual sites can be specified to be removed from the list.
+Adds a shortcode allowing multisite admin to display a list of all the sites in the current installation. Sites can be sorted alphabetically or by site creation date and individual sites can be specified to be removed from the list. Please note that as written this plugin must be configured on the parent site in the installation (site 1). This is for security reasons allowing the site admin to create a site list without necessarily letting all member sites see the list or expose sites that shouldn't be.
 
 == Long Description ==
 
@@ -25,6 +25,8 @@ Makes displaying a list of all the sites on a multi-site installation easy by us
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Add the [site-list] shortcode to and page or post where you would like a current list of sites on the wordpress installation
 4. To remove sites simply check them on the options page.
+
+Note: This plugin may only be configured from the parent site (blog 1) for security reasons.
 
 = Translations =
 *Lithuanian by <a href="http://www.host1free.com/">Vincent G</a>
