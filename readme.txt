@@ -5,7 +5,7 @@ Donate link: http://bit51.com/software/multi-site-site-list-shortcode/
 Tags: Multisite, index, site list
 Requires at least: 3.0
 Tested up to: 3.8.1
-Stable tag: 5.4.3
+Stable tag: 5.5
 
 
 == License ==  
@@ -22,7 +22,7 @@ Makes displaying a list of all the sites on a multi-site installation easy by us
 == Installation ==
 
 1. Upload all files to the `/wp-content/plugins/multi-site-site-list-shortcode` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
+2. Activate the plugin through the 'Plugins' menu in WordPress (we recommend network activation although it isn't required).
 3. Add the [site-list] shortcode to and page or post where you would like a current list of sites on the wordpress installation
 4. To remove sites simply check them on the options page.
 
@@ -33,6 +33,11 @@ Note: This plugin may only be configured from the parent site (blog 1) for secur
 
 
 == Changelog ==
+
+= 5.4.4 =
+* Removed unneeded meta box on settings page
+* Updated readme with better instructions
+* Finished iThemes conversion.
 
 = 5.4.3 =
 * Moved to iThemes.com
