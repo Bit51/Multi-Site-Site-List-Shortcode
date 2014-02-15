@@ -2,7 +2,7 @@
 
 if ( !class_exists( 'mssls_admin' ) ) {
 
-	class mssls_admin extends bit51_mssls {
+	class mssls_admin extends ithemes_mssls {
 
 		/**
 		 * Initialize admin function
@@ -76,7 +76,7 @@ if ( !class_exists( 'mssls_admin' ) ) {
 		function general_options() {
 			?>
 			<form method="post" action="options.php">
-				<?php settings_fields( 'bit51_mssls_options' ); //use main settings group ?>
+				<?php settings_fields( 'ithemes_mssls_options' ); //use main settings group ?>
 				<?php $options = get_option( $this->primarysettings ); //use settings fields ?>
 				<table class="form-table">
 					<tr valign="top">
@@ -84,10 +84,10 @@ if ( !class_exists( 'mssls_admin' ) ) {
 							<label for "sortby"><?php _e( 'Sort By', 'multi_site_site_list_shortcode' ); ?></label>
 						</th>
 						<td>
-							<input name="bit51_mssls[sortby]" id="sortby" value="0"
+							<input name="ithemes_mssls[sortby]" id="sortby" value="0"
 							       type="radio" <?php checked( '0', $options['sortby'] ); ?> /> <?php _e( 'Alphabetically', 'multi_site_site_list_shortcode' ); ?>
 							<br/>
-							<input name="bit51_mssls[sortby]" id="sortby" value="1"
+							<input name="ithemes_mssls[sortby]" id="sortby" value="1"
 							       type="radio" <?php checked( '1', $options['sortby'] ); ?> /> <?php _e( 'Site Creation Date', 'multi_site_site_list_shortcode' ); ?>
 						</td>
 					</tr>
@@ -96,10 +96,10 @@ if ( !class_exists( 'mssls_admin' ) ) {
 							<label for "showtag"><?php _e( 'Show Taglines', 'multi_site_site_list_shortcode' ); ?></label>
 						</th>
 						<td>
-							<input name="bit51_mssls[showtag]" id="sortby" value="0"
+							<input name="ithemes_mssls[showtag]" id="sortby" value="0"
 							       type="radio" <?php checked( '0', $options['showtag'] ); ?> /> <?php _e( 'No', 'multi_site_site_list_shortcode' ); ?>
 							<br/>
-							<input name="bit51_mssls[showtag]" id="sortby" value="1"
+							<input name="ithemes_mssls[showtag]" id="sortby" value="1"
 							       type="radio" <?php checked( '1', $options['showtag'] ); ?> /> <?php _e( 'Yes', 'multi_site_site_list_shortcode' ); ?>
 						</td>
 					</tr>
@@ -108,10 +108,10 @@ if ( !class_exists( 'mssls_admin' ) ) {
 							<label for "openin"><?php _e( 'Link Target', 'multi_site_site_list_shortcode' ); ?></label>
 						</th>
 						<td>
-							<input name="bit51_mssls[openin]" id="openin" value="0"
+							<input name="ithemes_mssls[openin]" id="openin" value="0"
 							       type="radio" <?php checked( '0', $options['openin'] ); ?> /> <?php _e( 'Same Window', 'multi_site_site_list_shortcode' ); ?>
 							<br/>
-							<input name="bit51_mssls[openin]" id="openin" value="1"
+							<input name="ithemes_mssls[openin]" id="openin" value="1"
 							       type="radio" <?php checked( '1', $options['openin'] ); ?> /> <?php _e( 'New Window', 'multi_site_site_list_shortcode' ); ?>
 						</td>
 					</tr>
@@ -120,7 +120,7 @@ if ( !class_exists( 'mssls_admin' ) ) {
 							<label for "limit"><?php _e( 'Limit Output', 'multi_site_site_list_shortcode' ); ?></label>
 						</th>
 						<td>
-							<input name="bit51_mssls[limit]" id="limit" value="<?php echo $options['limit']; ?>"
+							<input name="ithemes_mssls[limit]" id="limit" value="<?php echo $options['limit']; ?>"
 							       type="text"/> <br/>
 
 							<p><?php _e( 'Limit the number of sites displayed. This is useful if using the shortcode in a text widget. Set 0 for no limit.', 'multi_site_site_list_shortcode' ); ?></p>
@@ -164,7 +164,7 @@ if ( !class_exists( 'mssls_admin' ) ) {
 									$sitedetails = $wpdb->get_results( 'SELECT option_value FROM `' . $table . '` WHERE option_name IN (\'siteurl\',\'blogname\') ORDER BY option_name DESC' ); //get site details
 
 									if ( $sitedetails ) { //as long as blog exists display it with a checkbox
-										echo '<input type="checkbox" ' . $checked . ' name="bit51_mssls[excluded' . $blog . ']" value="' . $blog . '" id="' . $blog . '" /> <a href="' . $sitedetails[0]->option_value . '">' . $sitedetails[1]->option_value . '</a><br />';
+										echo '<input type="checkbox" ' . $checked . ' name="ithemes_mssls[excluded' . $blog . ']" value="' . $blog . '" id="' . $blog . '" /> <a href="' . $sitedetails[0]->option_value . '">' . $sitedetails[1]->option_value . '</a><br />';
 									}
 								}
 							}

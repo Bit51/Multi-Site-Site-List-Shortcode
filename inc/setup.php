@@ -2,7 +2,7 @@
 
 if ( !class_exists( 'mssls_setup' ) ) {
 
-	class mssls_setup extends bit51_mssls {
+	class mssls_setup extends ithemes_mssls {
 
 		/**
 		 * Verify case is set correctly and continue or die

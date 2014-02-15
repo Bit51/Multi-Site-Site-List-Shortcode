@@ -17,9 +17,9 @@ load_plugin_textdomain( 'multi_site_site_list_shortcode', false, dirname( plugin
 //Require common Bit51 library
 require_once( plugin_dir_path( __FILE__ ) . 'lib/bit51/bit51.php' );
 
-if ( !class_exists( 'bit51_mssls' ) ) {
+if ( !class_exists( 'ithemes_mssls' ) ) {
 
-	class bit51_mssls extends Bit51 {
+	class ithemes_mssls extends Bit51 {
 
 		public $pluginversion = '5.4.3'; //current plugin version
 
@@ -32,11 +32,11 @@ if ( !class_exists( 'bit51_mssls' ) ) {
 		public $wppage = 'http://wordpress.org/extend/plugins/multi-site-site-list-shortcode/';
 		public $accesslvl = 'manage_network_options';
 		public $paypalcode = '7GDQDFENDBDAA';
-		public $plugindata = 'bit51_mssls_data';
-		public $primarysettings = 'bit51_mssls';
+		public $plugindata = 'ithemes_mssls_data';
+		public $primarysettings = 'ithemes_mssls';
 		public $settings = array(
-			'bit51_mssls_options' => array(
-				'bit51_mssls' => array(
+			'ithemes_mssls_options' => array(
+				'ithemes_mssls' => array(
 					'callback' => 'mssls_val_options',
 					'sortby' => '0',
 					'openin' => '0',
@@ -196,4 +196,4 @@ if ( !class_exists( 'bit51_mssls' ) ) {
 }
 
 //create plugin object
-new bit51_mssls();
+new ithemes_mssls();

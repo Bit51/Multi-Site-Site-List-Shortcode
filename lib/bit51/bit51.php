@@ -469,46 +469,46 @@ if ( !class_exists( 'Bit51' ) ) {
 			//display the notifcation if they haven't turned it off and they've been using the plugin at least 30 days
 			if ( !isset( $options['no-nag'] ) && $options['activatestamp'] < ( current_time( 'timestamp' ) - 2952000 ) ) {
 
-				if ( !function_exists( 'bit51_plugin_donate_notice' ) ) {
+				if ( !function_exists( 'ithemes_plugin_donate_notice' ) ) {
 
-					function bit51_plugin_donate_notice() {
+					function ithemes_plugin_donate_notice() {
 
 						global $plugname;
 						global $plughook;
 						global $plugopts;
 
 						echo '<div class="updated">
-				       <p>' . __( 'It looks like you\'ve been enjoying', $plughook ) . ' ' . $plugname . ' ' . __( 'for at least 30 days. Would you consider a small donation to help support continued development of the plugin?', $plughook ) . '</p> <p><input type="button" class="button " value="' . __( 'Support This Plugin', $plughook ) . '" onclick="document.location.href=\'?bit51_lets_donate=yes&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Rate it 5★\'s', $plughook ) . '" onclick="document.location.href=\'?bit51_lets_rate=yes&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Tell Your Followers', $plughook ) . '" onclick="document.location.href=\'?bit51_lets_tweet=yes&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Don\'t Bug Me Again', $plughook ) . '" onclick="document.location.href=\'?bit51_donate_nag=off&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';"></p>
+				       <p>' . __( 'It looks like you\'ve been enjoying', $plughook ) . ' ' . $plugname . ' ' . __( 'for at least 30 days. Would you consider a small donation to help support continued development of the plugin?', $plughook ) . '</p> <p><input type="button" class="button " value="' . __( 'Support This Plugin', $plughook ) . '" onclick="document.location.href=\'?ithemes_lets_donate=yes&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Rate it 5★\'s', $plughook ) . '" onclick="document.location.href=\'?ithemes_lets_rate=yes&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Tell Your Followers', $plughook ) . '" onclick="document.location.href=\'?ithemes_lets_tweet=yes&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Don\'t Bug Me Again', $plughook ) . '" onclick="document.location.href=\'?ithemes_donate_nag=off&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';"></p>
 					    </div>';
 
 					}
 
 				}
 
-				add_action( 'admin_notices', 'bit51_plugin_donate_notice' ); //register notification
+				add_action( 'admin_notices', 'ithemes_plugin_donate_notice' ); //register notification
 
 			}
 
 			//if they've clicked a button hide the notice
-			if ( ( isset( $_GET['bit51_donate_nag'] ) || isset( $_GET['bit51_lets_rate'] ) || isset( $_GET['bit51_lets_tweet'] ) || isset( $_GET['bit51_lets_donate'] ) ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'bit51-nag' ) ) {
+			if ( ( isset( $_GET['ithemes_donate_nag'] ) || isset( $_GET['ithemes_lets_rate'] ) || isset( $_GET['ithemes_lets_tweet'] ) || isset( $_GET['ithemes_lets_donate'] ) ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'bit51-nag' ) ) {
 
 				$options = get_option( $this->plugindata );
 				$options['no-nag'] = 1;
 				update_option( $this->plugindata, $options );
-				remove_action( 'admin_notices', 'bit51_plugin_donate_notice' );
+				remove_action( 'admin_notices', 'ithemes_plugin_donate_notice' );
 
 				//take the user to paypal if they've clicked donate
-				if ( isset( $_GET['bit51_lets_donate'] ) ) {
+				if ( isset( $_GET['ithemes_lets_donate'] ) ) {
 					wp_redirect( 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=' . $this->paypalcode, '302' );
 				}
 
 				//Go to the WordPress page to let them rate it.
-				if ( isset( $_GET['bit51_lets_rate'] ) ) {
+				if ( isset( $_GET['ithemes_lets_rate'] ) ) {
 					wp_redirect( $this->wppage, '302' );
 				}
 
 				//Compose a Tweet
-				if ( isset( $_GET['bit51_lets_tweet'] ) ) {
+				if ( isset( $_GET['ithemes_lets_tweet'] ) ) {
 					wp_redirect( 'http://twitter.com/home?status=' . urlencode( 'I use ' . $this->pluginname . ' for WordPress by @bit51 and you should too - ' . $this->homepage ), '302' );
 				}
 
