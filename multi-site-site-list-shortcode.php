@@ -14,12 +14,12 @@
 //load the text domain
 load_plugin_textdomain( 'multi_site_site_list_shortcode', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
-//Require common Bit51 library
-require_once( plugin_dir_path( __FILE__ ) . 'lib/bit51/bit51.php' );
+//Require common iThemes library
+require_once( plugin_dir_path( __FILE__ ) . 'lib/ithemes/ithemes.php' );
 
 if ( !class_exists( 'ithemes_mssls' ) ) {
 
-	class ithemes_mssls extends Bit51 {
+	class ithemes_mssls extends iThemes {
 
 		public $pluginversion = '5.4.3'; //current plugin version
 

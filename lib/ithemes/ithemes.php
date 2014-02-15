@@ -1,16 +1,16 @@
 <?php
 
 /*
- * Bit51 standard library functions for all Bit51.com plugins
+ * ithemes standard library functions for all ithemes.com plugins
  * 
  * Thanks to Yoast (http://www.yoast.com), W3 Total Cache and Ozh Richard (http://planetozh.com) for a lot of the inspiration and some code snipets used in the rewrite of this plugin. Many of the ideas for this class as well as some of the functions of it's functions and the associated CSS are borrowed from the work of these great developers (I don't think anything is verbatim but some is close as I didn't feel it necessary to reinvent the wheel, in particular with regards to admin page layout).
  */
 
-if ( !class_exists( 'Bit51' ) ) {
+if ( !class_exists( 'iThemes' ) ) {
 
-	abstract class Bit51 {
+	abstract class iThemes {
 
-		var $feed = 'http://bit51.com/feed'; //current address of Bit51.com feed
+		var $feed = 'http://ithemes.com/feed'; //current address of ithemes.com feed
 
 		/**
 		 * Register admin javascripts (only for plugin admin page)
@@ -43,7 +43,7 @@ if ( !class_exists( 'Bit51' ) ) {
 				wp_enqueue_style( 'thickbox' );
 				wp_enqueue_style( 'global' );
 				wp_enqueue_style( 'wp-admin' );
-				wp_enqueue_style( 'bit51-css', plugin_dir_url( $this->pluginbase, __FILE__ ) . 'lib/bit51/bit51.css' );
+				wp_enqueue_style( 'ithemes-css', plugin_dir_url( $this->pluginbase, __FILE__ ) . 'lib/ithemes/ithemes.css' );
 
 			}
 
@@ -282,14 +282,14 @@ if ( !class_exists( 'Bit51' ) ) {
 			?>
 			<div class="wrap">
 				<?php if ( $icon == '' ) { ?>
-					<a href="http://bit51.com/">
-						<div id="bit51-icon"
-						     style="background: url(<?php echo plugin_dir_url( $this->pluginbase, __FILE__ ); ?>lib/bit51/images/bit51.png) no-repeat;"
+					<a href="http://ithemes.com/">
+						<div id="ithemes-icon"
+						     style="background: url(<?php echo plugin_dir_url( $this->pluginbase, __FILE__ ); ?>lib/ithemes/images/ithemes.png) no-repeat;"
 						     class="icon32"><br/></div>
 					</a>
 				<?php } else { ?>
-					<a href="http://bit51.com/">
-						<div id="bit51-icon" style="background: url(<?php echo $icon; ?>) no-repeat;" class="icon32">
+					<a href="http://ithemes.com/">
+						<div id="ithemes-icon" style="background: url(<?php echo $icon; ?>) no-repeat;" class="icon32">
 							<br/></div>
 					</a>
 				<?php } ?>
@@ -342,14 +342,14 @@ if ( !class_exists( 'Bit51' ) ) {
 
 			$content = __( 'If you need help getting this plugin or have found a bug please visit the <a href="' . $this->supportpage . '" target="_blank">support forums</a>.', 'multi_site_site_list_shortcode' );
 
-			$this->postbox( 'bit51support', __( 'Need Help?', 'multi_site_site_list_shortcode' ), $content ); //execute as postbox
+			$this->postbox( 'ithemessupport', __( 'Need Help?', 'multi_site_site_list_shortcode' ), $content ); //execute as postbox
 
 		}
 
 		/**
-		 * Display Bit51's latest posts
+		 * Display ithemes's latest posts
 		 *
-		 * Displays latest posts from Bit51 in admin page sidebar
+		 * Displays latest posts from ithemes in admin page sidebar
 		 *
 		 **/
 		function news() {
@@ -366,7 +366,7 @@ if ( !class_exists( 'Bit51' ) ) {
 
 				if ( !$feeditems ) {
 
-					$content .= '<li class="bit51">' . __( 'No news items, feed might be broken...', 'multi_site_site_list_shortcode' ) . '</li>';
+					$content .= '<li class="ithemes">' . __( 'No news items, feed might be broken...', 'multi_site_site_list_shortcode' ) . '</li>';
 
 				} else {
 
@@ -374,7 +374,7 @@ if ( !class_exists( 'Bit51' ) ) {
 
 						$url = preg_replace( '/#.*/', '', esc_url( $item->get_permalink(), $protocolls = null, 'display' ) );
 
-						$content .= '<li class="bit51"><a class="rsswidget" href="' . $url . '" target="_blank">' . esc_html( $item->get_title() ) . '</a></li>';
+						$content .= '<li class="ithemes"><a class="rsswidget" href="' . $url . '" target="_blank">' . esc_html( $item->get_title() ) . '</a></li>';
 
 					}
 
@@ -386,14 +386,14 @@ if ( !class_exists( 'Bit51' ) ) {
 				$content = __( 'It appears as if the feed is currently down. Please try again later', 'multi_site_site_list_shortcode' );
 			}
 
-			$this->postbox( 'bit51posts', __( 'The Latest from Bit51', 'multi_site_site_list_shortcode' ), $content ); //set up postbox
+			$this->postbox( 'ithemesposts', __( 'The Latest from iThemes.com', 'multi_site_site_list_shortcode' ), $content ); //set up postbox
 
 		}
 
 		/**
 		 * Display donate box
 		 *
-		 * Displays bit51 donate box in sidebar of admin pages
+		 * Displays ithemes donate box in sidebar of admin pages
 		 *
 		 **/
 		function donate() {
@@ -410,7 +410,7 @@ if ( !class_exists( 'Bit51' ) ) {
 
 			$content .= '<li>' . __( 'Talk about it on your site and link back to the ', 'multi_site_site_list_shortcode' ) . '<a href="' . $this->homepage . '" target="_blank">' . __( 'plugin page.', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
-			$content .= '<li><a href="http://twitter.com/home?status=' . urlencode( 'I use ' . $this->pluginname . ' for WordPress by @bit51 and you should too - ' . $this->homepage ) . '" target="_blank">' . __( 'Tweet about it. ', 'multi_site_site_list_shortcode' ) . '</a></li>';
+			$content .= '<li><a href="http://twitter.com/home?status=' . urlencode( 'I use ' . $this->pluginname . ' for WordPress by @ithemes and you should too - ' . $this->homepage ) . '" target="_blank">' . __( 'Tweet about it. ', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
 			$content .= '</ul>';
 
@@ -421,24 +421,24 @@ if ( !class_exists( 'Bit51' ) ) {
 		/**
 		 * Display social links
 		 *
-		 * Displays Bit51's social links on admin sidebar
+		 * Displays ithemes's social links on admin sidebar
 		 *
 		 **/
 		function social() {
 
 			$content = '<ul>';
 
-			$content .= '<li class="facebook"><a href="https://www.facebook.com/bit51" target="_blank">' . __( 'Like Bit51 on Facebook', 'multi_site_site_list_shortcode' ) . '</a></li>';
+			$content .= '<li class="facebook"><a href="https://www.facebook.com/ithemes" target="_blank">' . __( 'Like ithemes on Facebook', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
-			$content .= '<li class="twitter"><a href="http://twitter.com/Bit51" target="_blank">' . __( 'Follow Bit51 on Twitter', 'multi_site_site_list_shortcode' ) . '</a></li>';
+			$content .= '<li class="twitter"><a href="http://twitter.com/ithemes" target="_blank">' . __( 'Follow ithemes on Twitter', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
-			$content .= '<li class="google"><a href="https://plus.google.com/104513012839087985497" target="_blank">' . __( 'Circle Bit51 on Google+', 'multi_site_site_list_shortcode' ) . '</a></li>';
+			$content .= '<li class="google"><a href="https://plus.google.com/104513012839087985497" target="_blank">' . __( 'Circle ithemes on Google+', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
-			$content .= '<li class="subscribe"><a href="http://bit51.com/subscribe" target="_blank">' . __( 'Subscribe with RSS or Email', 'multi_site_site_list_shortcode' ) . '</a></li>';
+			$content .= '<li class="subscribe"><a href="http://ithemes.com/subscribe" target="_blank">' . __( 'Subscribe with RSS or Email', 'multi_site_site_list_shortcode' ) . '</a></li>';
 
 			$content .= '</ul>';
 
-			$this->postbox( 'bit51social', __( 'Bit51 on the Web', 'multi_site_site_list_shortcode' ), $content ); //setup the postbox
+			$this->postbox( 'ithemessocial', __( 'ithemes on the Web', 'multi_site_site_list_shortcode' ), $content ); //setup the postbox
 
 		}
 
@@ -478,7 +478,7 @@ if ( !class_exists( 'Bit51' ) ) {
 						global $plugopts;
 
 						echo '<div class="updated">
-				       <p>' . __( 'It looks like you\'ve been enjoying', $plughook ) . ' ' . $plugname . ' ' . __( 'for at least 30 days. Would you consider a small donation to help support continued development of the plugin?', $plughook ) . '</p> <p><input type="button" class="button " value="' . __( 'Support This Plugin', $plughook ) . '" onclick="document.location.href=\'?ithemes_lets_donate=yes&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Rate it 5★\'s', $plughook ) . '" onclick="document.location.href=\'?ithemes_lets_rate=yes&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Tell Your Followers', $plughook ) . '" onclick="document.location.href=\'?ithemes_lets_tweet=yes&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Don\'t Bug Me Again', $plughook ) . '" onclick="document.location.href=\'?ithemes_donate_nag=off&_wpnonce=' . wp_create_nonce( 'bit51-nag' ) . '\';"></p>
+				       <p>' . __( 'It looks like you\'ve been enjoying', $plughook ) . ' ' . $plugname . ' ' . __( 'for at least 30 days. Would you consider a small donation to help support continued development of the plugin?', $plughook ) . '</p> <p><input type="button" class="button " value="' . __( 'Support This Plugin', $plughook ) . '" onclick="document.location.href=\'?ithemes_lets_donate=yes&_wpnonce=' . wp_create_nonce( 'ithemes-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Rate it 5★\'s', $plughook ) . '" onclick="document.location.href=\'?ithemes_lets_rate=yes&_wpnonce=' . wp_create_nonce( 'ithemes-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Tell Your Followers', $plughook ) . '" onclick="document.location.href=\'?ithemes_lets_tweet=yes&_wpnonce=' . wp_create_nonce( 'ithemes-nag' ) . '\';">  <input type="button" class="button " value="' . __( 'Don\'t Bug Me Again', $plughook ) . '" onclick="document.location.href=\'?ithemes_donate_nag=off&_wpnonce=' . wp_create_nonce( 'ithemes-nag' ) . '\';"></p>
 					    </div>';
 
 					}
@@ -490,7 +490,7 @@ if ( !class_exists( 'Bit51' ) ) {
 			}
 
 			//if they've clicked a button hide the notice
-			if ( ( isset( $_GET['ithemes_donate_nag'] ) || isset( $_GET['ithemes_lets_rate'] ) || isset( $_GET['ithemes_lets_tweet'] ) || isset( $_GET['ithemes_lets_donate'] ) ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'bit51-nag' ) ) {
+			if ( ( isset( $_GET['ithemes_donate_nag'] ) || isset( $_GET['ithemes_lets_rate'] ) || isset( $_GET['ithemes_lets_tweet'] ) || isset( $_GET['ithemes_lets_donate'] ) ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'ithemes-nag' ) ) {
 
 				$options = get_option( $this->plugindata );
 				$options['no-nag'] = 1;
@@ -509,7 +509,7 @@ if ( !class_exists( 'Bit51' ) ) {
 
 				//Compose a Tweet
 				if ( isset( $_GET['ithemes_lets_tweet'] ) ) {
-					wp_redirect( 'http://twitter.com/home?status=' . urlencode( 'I use ' . $this->pluginname . ' for WordPress by @bit51 and you should too - ' . $this->homepage ), '302' );
+					wp_redirect( 'http://twitter.com/home?status=' . urlencode( 'I use ' . $this->pluginname . ' for WordPress by @ithemes and you should too - ' . $this->homepage ), '302' );
 				}
 
 			}

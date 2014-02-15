@@ -226,7 +226,7 @@ msgid "Multi-Site Site List Shortcode"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://bit51.com/software/multi-site-site-list-shortcode/"
+msgid "http://ithemes.com/software/multi-site-site-list-shortcode/"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -238,5 +238,5 @@ msgid "Bit51"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "http://bit51.com"
+msgid "http://ithemes.com"
 msgstr ""
