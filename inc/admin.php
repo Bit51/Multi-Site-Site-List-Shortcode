@@ -47,7 +47,6 @@ if ( !class_exists( 'mssls_admin' ) ) {
 				array(
 					array( __( 'Instructions', 'multi_site_site_list_shortcode' ), 'install_instructions' ), //primary admin page content
 					array( __( 'General Options', 'multi_site_site_list_shortcode' ), 'general_options' ), //primary admin page content
-					array( __( 'Exclude Sites', 'multi_site_site_list_shortcode' ), 'exclude_options' ) //choose sites to be excluded from view
 				)
 			);
 		}
