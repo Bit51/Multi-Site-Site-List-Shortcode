@@ -1,14 +1,14 @@
 <?php
 /*
 	Plugin Name: Multi-Site Site List Shortcode
-	Plugin URI: http://bit51.com/software/multi-site-site-list-shortcode/
+	Plugin URI: http://wordpress.org/plugins/multi-site-site-list-shortcode/
 	Description: Displays the site list with a shortcode for network installations.
-	Version: 5.4.2
+	Version: 5.4.3
 	Domain Path: /languages
-	Author: Bit51
-	Author URI: http://bit51.com
+	Author: iThemes
+	Author URI: http://ithemes.com
 	License: GPLv2
-	Copyright 2013  Bit51  (email : info@bit51.com)
+	Copyright 2014  iThemes  (email : updates@ithemes.com)
 */
 
 //load the text domain
@@ -21,13 +21,13 @@ if ( !class_exists( 'bit51_mssls' ) ) {
 
 	class bit51_mssls extends Bit51 {
 
-		public $pluginversion = '5.4.2'; //current plugin version
+		public $pluginversion = '5.4.3'; //current plugin version
 
 		//important plugin information
 		public $hook = 'multi_site_site_list_shortcode';
 		public $pluginbase = 'multi-site-site-list-shortcode/multi-site-site-list-shortcode.php';
 		public $pluginname = 'Multi-Site Site List Shortcode';
-		public $homepage = 'http://bit51.com/software/multi-site-site-list-shortcode/';
+		public $homepage = 'http://wordpress.org/plugins/multi-site-site-list-shortcode/';
 		public $supportpage = 'http://wordpress.org/support/plugin/multi-site-site-list-shortcode';
 		public $wppage = 'http://wordpress.org/extend/plugins/multi-site-site-list-shortcode/';
 		public $accesslvl = 'manage_network_options';

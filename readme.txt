@@ -1,11 +1,11 @@
 
 === Multi-Site Site List Shortcode ===
-Contributors: Bit51, ChrisWiegman
+Contributors: ithemes, ChrisWiegman
 Donate link: http://bit51.com/software/multi-site-site-list-shortcode/
 Tags: Multisite, index, site list
 Requires at least: 3.0
-Tested up to: 3.6.1
-Stable tag: 5.4.2
+Tested up to: 3.8.1
+Stable tag: 5.4.3
 
 
 == License ==  
@@ -31,6 +31,10 @@ Makes displaying a list of all the sites on a multi-site installation easy by us
 
 
 == Changelog ==
+
+= 5.4.3 =
+* Moved to iThemes.com
+* Tested in 3.8.1
 
 = 5.4.2 =
 * Remove pass by reference (should now work with PHP 5.4)
