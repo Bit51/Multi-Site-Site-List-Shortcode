@@ -17,31 +17,31 @@ load_plugin_textdomain( 'multi_site_site_list_shortcode', false, dirname( plugin
 //Require common iThemes library
 require_once( plugin_dir_path( __FILE__ ) . 'lib/ithemes/ithemes.php' );
 
-if ( !class_exists( 'ithemes_mssls' ) ) {
+if ( ! class_exists( 'ithemes_mssls' ) ) {
 
 	class ithemes_mssls extends iThemes {
 
 		public $pluginversion = '5.4.3'; //current plugin version
 
 		//important plugin information
-		public $hook = 'multi_site_site_list_shortcode';
-		public $pluginbase = 'multi-site-site-list-shortcode/multi-site-site-list-shortcode.php';
-		public $pluginname = 'Multi-Site Site List Shortcode';
-		public $homepage = 'http://wordpress.org/plugins/multi-site-site-list-shortcode/';
-		public $supportpage = 'http://wordpress.org/support/plugin/multi-site-site-list-shortcode';
-		public $wppage = 'http://wordpress.org/extend/plugins/multi-site-site-list-shortcode/';
-		public $accesslvl = 'manage_network_options';
-		public $paypalcode = '7GDQDFENDBDAA';
-		public $plugindata = 'ithemes_mssls_data';
+		public $hook            = 'multi_site_site_list_shortcode';
+		public $pluginbase      = 'multi-site-site-list-shortcode/multi-site-site-list-shortcode.php';
+		public $pluginname      = 'Multi-Site Site List Shortcode';
+		public $homepage        = 'http://wordpress.org/plugins/multi-site-site-list-shortcode/';
+		public $supportpage     = 'http://wordpress.org/support/plugin/multi-site-site-list-shortcode';
+		public $wppage          = 'http://wordpress.org/extend/plugins/multi-site-site-list-shortcode/';
+		public $accesslvl       = 'manage_network_options';
+		public $paypalcode      = '7GDQDFENDBDAA';
+		public $plugindata      = 'ithemes_mssls_data';
 		public $primarysettings = 'ithemes_mssls';
-		public $settings = array(
+		public $settings        = array(
 			'ithemes_mssls_options' => array(
 				'ithemes_mssls' => array(
 					'callback' => 'mssls_val_options',
-					'sortby' => '0',
-					'openin' => '0',
-					'limit' => '0',
-					'showtag' => '0',
+					'sortby'   => '0',
+					'openin'   => '0',
+					'limit'    => '0',
+					'showtag'  => '0',
 					'excluded' => array()
 				)
 			)
@@ -67,7 +67,7 @@ if ( !class_exists( 'ithemes_mssls' ) ) {
 			register_uninstall_hook( __FILE__, array( 'mssls_setup', 'on_uninstall' ) );
 
 			add_shortcode( 'site-list', array( $this, 'display_site_list' ) );
-			if ( !is_admin() ) {
+			if ( ! is_admin() ) {
 				add_filter( 'widget_text', 'do_shortcode' );
 			}
 		}
@@ -76,6 +76,7 @@ if ( !class_exists( 'ithemes_mssls' ) ) {
 		 * Create site list
 		 */
 		function display_site_list( $attr ) {
+
 			global $wpdb;
 			global $table_prefix;
 			$output = '';
@@ -120,15 +121,15 @@ if ( !class_exists( 'ithemes_mssls' ) ) {
 						$sortby = $options['sortby'];
 					}
 
-					if ( $sitedetails && !in_array( $blog, $excluded ) ) { //if the blog exists and isn't on the exclusion list add it to array
+					if ( $sitedetails && ! in_array( $blog, $excluded ) ) { //if the blog exists and isn't on the exclusion list add it to array
 						if ( $sortby == 0 ) { //proper array construction depending on sort
-							$siteArray[$sitedetails[1]->option_value]['url'] = $sitedetails[0]->option_value;
-							$siteArray[$sitedetails[1]->option_value]['id'] = $blog;
-							$siteArray[$sitedetails[1]->option_value]['desc'] = $sitedetails[2]->option_value;
+							$siteArray[ $sitedetails[1]->option_value ]['url']  = $sitedetails[0]->option_value;
+							$siteArray[ $sitedetails[1]->option_value ]['id']   = $blog;
+							$siteArray[ $sitedetails[1]->option_value ]['desc'] = $sitedetails[2]->option_value;
 						} else {
-							$siteArray[$blog]['url'] = $sitedetails[0]->option_value;
-							$siteArray[$blog]['title'] = $sitedetails[1]->option_value;
-							$siteArray[$blog]['desc'] = $sitedetails[2]->option_value;
+							$siteArray[ $blog ]['url']   = $sitedetails[0]->option_value;
+							$siteArray[ $blog ]['title'] = $sitedetails[1]->option_value;
+							$siteArray[ $blog ]['desc']  = $sitedetails[2]->option_value;
 						}
 					}
 				}
@@ -182,7 +183,7 @@ if ( !class_exists( 'ithemes_mssls' ) ) {
 						$output .= '<li><a href="' . $value['url'] . '"' . $target . '>' . $value['title'] . '</a>' . $desc . '</li>';
 					}
 
-					$count++;
+					$count ++;
 
 				} else {
 					break;
