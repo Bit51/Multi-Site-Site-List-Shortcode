@@ -21,7 +21,7 @@ if ( ! class_exists( 'ithemes_mssls' ) ) {
 
 	class ithemes_mssls extends iThemes {
 
-		public $pluginversion = '5.4.3'; //current plugin version
+		public $pluginversion = '5.5'; //current plugin version
 
 		//important plugin information
 		public $hook            = 'multi_site_site_list_shortcode';
