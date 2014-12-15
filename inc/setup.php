@@ -1,6 +1,6 @@
 <?php
 
-if ( !class_exists( 'mssls_setup' ) ) {
+if ( ! class_exists( 'mssls_setup' ) ) {
 
 	class mssls_setup extends ithemes_mssls {
 
@@ -9,7 +9,7 @@ if ( !class_exists( 'mssls_setup' ) ) {
 		 */
 		function __construct( $case = false ) {
 
-			if ( !$case ) {
+			if ( ! $case ) {
 				die( 'error' );
 			}
 
@@ -32,6 +32,7 @@ if ( !class_exists( 'mssls_setup' ) ) {
 		 * Entrypoint for activation
 		 */
 		function on_activate() {
+
 			new mssls_setup( 'activate' );
 		}
 
@@ -55,6 +56,7 @@ if ( !class_exists( 'mssls_setup' ) ) {
 		 * Entrypoint for uninstall
 		 */
 		function on_uninstall() {
+
 			if ( __FILE__ != WP_UNINSTALL_PLUGIN ) { //verify they actually clicked uninstall
 				return;
 			}
@@ -66,6 +68,7 @@ if ( !class_exists( 'mssls_setup' ) ) {
 		 * Execute activation functions
 		 */
 		function activate_execute() {
+
 			$this->default_settings(); //verify and set default options
 
 			$options = get_option( $this->plugindata );
@@ -78,7 +81,7 @@ if ( !class_exists( 'mssls_setup' ) ) {
 			$options['version'] = $this->pluginversion; //set new version number
 
 			//remove no support nag if it's been more than six months
-			if ( !isset( $options['activatestamp'] ) || $options['activatestamp'] < ( time() - 15552000 ) ) {
+			if ( ! isset( $options['activatestamp'] ) || $options['activatestamp'] < ( time() - 15552000 ) ) {
 				if ( isset( $options['no-nag'] ) ) {
 					unset( $options['no-nag'] );
 				}

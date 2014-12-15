@@ -1,6 +1,6 @@
 <?php
 
-if ( !class_exists( 'mssls_admin' ) ) {
+if ( ! class_exists( 'mssls_admin' ) ) {
 
 	class mssls_admin extends ithemes_mssls {
 
@@ -8,6 +8,7 @@ if ( !class_exists( 'mssls_admin' ) ) {
 		 * Initialize admin function
 		 */
 		function __construct() {
+
 			global $blog_id;
 
 			if ( $blog_id == 1 ) {
@@ -35,6 +36,7 @@ if ( !class_exists( 'mssls_admin' ) ) {
 		 * Register page settings
 		 */
 		function register_settings_page() {
+
 			add_options_page( __( $this->pluginname, 'multi_site_site_list_shortcode' ), __( $this->pluginname, 'multi_site_site_list_shortcode' ), $this->accesslvl, 'multi_site_site_list_shortcode', array( $this, 'mssls_admin_init' ) );
 		}
 
@@ -43,11 +45,12 @@ if ( !class_exists( 'mssls_admin' ) ) {
 		 * To add more boxes to the admin page add a 2nd inner array item with title and callback function or content
 		 */
 		function mssls_admin_init() {
+
 			$this->admin_page( $this->pluginname . ' ' . __( 'Options', 'multi_site_site_list_shortcode' ),
-				array(
-					array( __( 'Instructions', 'multi_site_site_list_shortcode' ), 'install_instructions' ), //primary admin page content
-					array( __( 'General Options', 'multi_site_site_list_shortcode' ), 'general_options' ), //primary admin page content
-				)
+			                   array(
+				                   array( __( 'Instructions', 'multi_site_site_list_shortcode' ), 'install_instructions' ), //primary admin page content
+				                   array( __( 'General Options', 'multi_site_site_list_shortcode' ), 'general_options' ), //primary admin page content
+			                   )
 			);
 		}
 
@@ -55,6 +58,7 @@ if ( !class_exists( 'mssls_admin' ) ) {
 		 * Create instructions block
 		 */
 		function install_instructions() {
+
 			?>
 			<p><?php echo __( 'Set your options below and then enter the shortcode', 'multi_site_site_list_shortcode' ) . ' <strong><em>[site-list]</em></strong> ' . __( 'where you would like your site list to appear (you can even enter it in a text widget).', 'multi_site_site_list_shortcode' ); ?></p>
 			<p><?php echo __( 'You can overwrite the settings below to make it easier to use the shortcode in multiple locations. Here are the options:', 'multi_site_site_list_shortcode' ); ?></p>
@@ -73,6 +77,7 @@ if ( !class_exists( 'mssls_admin' ) ) {
 		 * Create admin page main content
 		 */
 		function general_options() {
+
 			?>
 			<form method="post" action="options.php">
 				<?php settings_fields( 'ithemes_mssls_options' ); //use main settings group ?>
@@ -92,7 +97,8 @@ if ( !class_exists( 'mssls_admin' ) ) {
 					</tr>
 					<tr valign="top">
 						<th scope="row">
-							<label for "showtag"><?php _e( 'Show Taglines', 'multi_site_site_list_shortcode' ); ?></label>
+							<label for
+							"showtag"><?php _e( 'Show Taglines', 'multi_site_site_list_shortcode' ); ?></label>
 						</th>
 						<td>
 							<input name="ithemes_mssls[showtag]" id="sortby" value="0"
@@ -127,7 +133,8 @@ if ( !class_exists( 'mssls_admin' ) ) {
 					</tr>
 					<tr valign="top">
 						<th scope="row">
-							<label for "openin"><?php _e( 'Exclude Sites', 'multi_site_site_list_shortcode' ); ?></label>
+							<label for
+							"openin"><?php _e( 'Exclude Sites', 'multi_site_site_list_shortcode' ); ?></label>
 						</th>
 						<td>
 							<?php
@@ -182,12 +189,13 @@ if ( !class_exists( 'mssls_admin' ) ) {
 		 * Validate input
 		 */
 		function mssls_val_options( $input ) {
+
 			$exclude = array(); //create exclude array
 
 			//if we're dealing with one of the exclude fields add the value to the exclude array
 			foreach ( $input as $field => $value ) {
 				if ( $field != 'sortby' && $field != 'openin' && $field != 'showtag' && $field != 'limit' ) {
-					unset( $input[$field] );
+					unset( $input[ $field ] );
 					$exclude[] = $value;
 				}
 			}
@@ -195,10 +203,10 @@ if ( !class_exists( 'mssls_admin' ) ) {
 			$input['excluded'] = serialize( $exclude ); //convert array to string and add to $input
 
 			//process non-exclude fields
-			$input['sortby'] = ( $input['sortby'] == 1 ? 1 : 0 );
-			$input['openin'] = ( $input['openin'] == 1 ? 1 : 0 );
+			$input['sortby']  = ( $input['sortby'] == 1 ? 1 : 0 );
+			$input['openin']  = ( $input['openin'] == 1 ? 1 : 0 );
 			$input['showtag'] = ( $input['showtag'] == 1 ? 1 : 0 );
-			$input['limit'] = intval( $input['limit'] );
+			$input['limit']   = intval( $input['limit'] );
 
 			return $input;
 		}

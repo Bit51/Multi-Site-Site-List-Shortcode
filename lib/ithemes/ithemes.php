@@ -6,7 +6,7 @@
  * Thanks to Yoast (http://www.yoast.com), W3 Total Cache and Ozh Richard (http://planetozh.com) for a lot of the inspiration and some code snipets used in the rewrite of this plugin. Many of the ideas for this class as well as some of the functions of it's functions and the associated CSS are borrowed from the work of these great developers (I don't think anything is verbatim but some is close as I didn't feel it necessary to reinvent the wheel, in particular with regards to admin page layout).
  */
 
-if ( !class_exists( 'iThemes' ) ) {
+if ( ! class_exists( 'iThemes' ) ) {
 
 	abstract class iThemes {
 
@@ -83,11 +83,13 @@ if ( !class_exists( 'iThemes' ) ) {
 		 * Adds plugin settings link to plugin page in WordPress admin area.
 		 *
 		 * @param object $links Array of WordPress links
-		 * @param string $file String name of current file
+		 * @param string $file  String name of current file
+		 *
 		 * @return object Array of WordPress links
 		 *
 		 **/
 		function add_action_link( $links, $file ) {
+
 			static $this_plugin;
 
 			if ( empty( $this_plugin ) ) {
@@ -169,8 +171,8 @@ if ( !class_exists( 'iThemes' ) ) {
 					//set missing options
 					foreach ( $defaults as $option => $value ) {
 
-						if ( $option != 'callback' && !isset( $options[$option] ) ) {
-							$options[$option] = $value;
+						if ( $option != 'callback' && ! isset( $options[ $option ] ) ) {
+							$options[ $option ] = $value;
 						}
 
 					}
@@ -178,8 +180,8 @@ if ( !class_exists( 'iThemes' ) ) {
 					//remove obsolete options
 					foreach ( $options as $option => $value ) {
 
-						if ( !isset( $defaults[$option] ) && $option != 'version' ) {
-							unset( $options[$option] );
+						if ( ! isset( $defaults[ $option ] ) && $option != 'version' ) {
+							unset( $options[ $option ] );
 						}
 
 					}
@@ -214,11 +216,12 @@ if ( !class_exists( 'iThemes' ) ) {
 		 *
 		 * Echos postbox for settings screen
 		 *
-		 * @param string $id css ID for postbox
-		 * @param string $title title to display to user
+		 * @param string $id      css ID for postbox
+		 * @param string $title   title to display to user
 		 * @param string $content postbox content
 		 **/
 		function postbox( $id, $title, $content ) {
+
 			?>
 			<div id="<?php echo $id; ?>" class="postbox">
 				<div class="handlediv" title="Click to toggle"><br/></div>
@@ -227,7 +230,7 @@ if ( !class_exists( 'iThemes' ) ) {
 				<div class="inside">
 					<?php
 					//execute content if it's a function or just echo it
-					if ( !strstr( $content, ' ' ) && method_exists( $this, $content ) ) {
+					if ( ! strstr( $content, ' ' ) && method_exists( $this, $content ) ) {
 
 						$this->$content();
 
@@ -242,8 +245,9 @@ if ( !class_exists( 'iThemes' ) ) {
 		<?php
 		}
 
-		function admin_tabs( $tabs, $current = NULL, $page = true ) {
-			if ( $current == NULL ) {
+		function admin_tabs( $tabs, $current = null, $page = true ) {
+
+			if ( $current == null ) {
 				$current = $this->hook;
 			}
 			$tabs = $tabs;
@@ -266,16 +270,16 @@ if ( !class_exists( 'iThemes' ) ) {
 		 *
 		 * Sets up main admin page layout and loads default sidebar boxes
 		 *
-		 * @param string $title Title of page to display to user
-		 * @param object $boxes array of primary content boxes in postbox form
-		 * @param string $icon[optional] icon file to display
-		 * @param object $tabs[optional] array of tabs to display
-		 * @param boolean $page[optional] true if stand-alone page, false otherwise
+		 * @param string  $title Title of page to display to user
+		 * @param object  $boxes array of primary content boxes in postbox form
+		 * @param string  $icon  [optional] icon file to display
+		 * @param object  $tabs  [optional] array of tabs to display
+		 * @param boolean $page  [optional] true if stand-alone page, false otherwise
 		 *
 		 **/
-		function admin_page( $title, $boxes, $icon = '', $tabs = NULL, $page = true ) {
+		function admin_page( $title, $boxes, $icon = '', $tabs = null, $page = true ) {
 
-			if ( ( $page != true && !isset( $_GET['tab'] ) ) || ( $page == true && isset( $_GET['tab'] ) ) ) {
+			if ( ( $page != true && ! isset( $_GET['tab'] ) ) || ( $page == true && isset( $_GET['tab'] ) ) ) {
 				return;
 			}
 
@@ -295,7 +299,7 @@ if ( !class_exists( 'iThemes' ) ) {
 				<?php } ?>
 				<h2><?php _e( $title, 'multi_site_site_list_shortcode' ) ?></h2>
 				<?php
-				if ( $tabs != NULL ) {
+				if ( $tabs != null ) {
 					if ( isset ( $_GET['tab'] ) ) {
 						$this->admin_tabs( $tabs, filter_var( $_GET['tab'], FILTER_SANITIZE_STRING ), false );
 					} elseif ( isset( $_GET['page'] ) ) {
@@ -358,13 +362,13 @@ if ( !class_exists( 'iThemes' ) ) {
 
 			$feed = fetch_feed( $this->feed ); //get the feed
 
-			if ( !isset( $feed->errors ) ) {
+			if ( ! isset( $feed->errors ) ) {
 
 				$feeditems = $feed->get_items( 0, $feed->get_item_quantity( 5 ) ); //narrow feed to last 5 items
 
 				$content = '<ul>'; //start list
 
-				if ( !$feeditems ) {
+				if ( ! $feeditems ) {
 
 					$content .= '<li class="ithemes">' . __( 'No news items, feed might be broken...', 'multi_site_site_list_shortcode' ) . '</li>';
 
@@ -452,7 +456,7 @@ if ( !class_exists( 'iThemes' ) ) {
 
 			global $blog_id; //get the current blog id
 
-			if ( is_multisite() && ( $blog_id != 1 || !current_user_can( 'manage_network_options' ) ) ) { //only display to network admin if in multisite
+			if ( is_multisite() && ( $blog_id != 1 || ! current_user_can( 'manage_network_options' ) ) ) { //only display to network admin if in multisite
 				return;
 			}
 
@@ -467,9 +471,9 @@ if ( !class_exists( 'iThemes' ) ) {
 			$plugopts = $this->plugin_options_url();
 
 			//display the notifcation if they haven't turned it off and they've been using the plugin at least 30 days
-			if ( !isset( $options['no-nag'] ) && $options['activatestamp'] < ( current_time( 'timestamp' ) - 2952000 ) ) {
+			if ( ! isset( $options['no-nag'] ) && $options['activatestamp'] < ( current_time( 'timestamp' ) - 2952000 ) ) {
 
-				if ( !function_exists( 'ithemes_plugin_donate_notice' ) ) {
+				if ( ! function_exists( 'ithemes_plugin_donate_notice' ) ) {
 
 					function ithemes_plugin_donate_notice() {
 
@@ -492,7 +496,7 @@ if ( !class_exists( 'iThemes' ) ) {
 			//if they've clicked a button hide the notice
 			if ( ( isset( $_GET['ithemes_donate_nag'] ) || isset( $_GET['ithemes_lets_rate'] ) || isset( $_GET['ithemes_lets_tweet'] ) || isset( $_GET['ithemes_lets_donate'] ) ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'ithemes-nag' ) ) {
 
-				$options = get_option( $this->plugindata );
+				$options           = get_option( $this->plugindata );
 				$options['no-nag'] = 1;
 				update_option( $this->plugindata, $options );
 				remove_action( 'admin_notices', 'ithemes_plugin_donate_notice' );
