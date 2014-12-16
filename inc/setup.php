@@ -31,7 +31,7 @@ if ( ! class_exists( 'mssls_setup' ) ) {
 		/**
 		 * Entrypoint for activation
 		 */
-		function on_activate() {
+		public static function on_activate() {
 
 			new mssls_setup( 'activate' );
 		}
@@ -39,7 +39,7 @@ if ( ! class_exists( 'mssls_setup' ) ) {
 		/**
 		 * Entrypoint for deactivation
 		 */
-		function on_deactivate() {
+		public static function on_deactivate() {
 
 			$devel = false; //set to true to uninstall for development
 
@@ -55,7 +55,7 @@ if ( ! class_exists( 'mssls_setup' ) ) {
 		/**
 		 * Entrypoint for uninstall
 		 */
-		function on_uninstall() {
+		public static function on_uninstall() {
 
 			if ( __FILE__ != WP_UNINSTALL_PLUGIN ) { //verify they actually clicked uninstall
 				return;
