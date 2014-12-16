@@ -82,7 +82,7 @@ if ( ! class_exists( 'ithemes_mssls' ) ) {
 			$output = '';
 
 			//this is a workaround for lack of settings api with multi-site
-			$options = $wpdb->get_results( 'SELECT option_value FROM `' . $wpdb->base_prefix . 'options` WHERE option_name IN (\'' . $this->primarysettings . '\') ORDER BY option_name DESC' );
+			$options = $wpdb->get_results( 'SELECT option_value FROM `' . $wpdb->prefix . 'options` WHERE option_name IN (\'' . $this->primarysettings . '\') ORDER BY option_name DESC' );
 
 			//convert options to array so we can use it like normal
 			$options = unserialize( $options[0]->option_value );
@@ -97,16 +97,14 @@ if ( ! class_exists( 'ithemes_mssls' ) ) {
 				$siteArray = array(); //initial array of sites to display
 
 				foreach ( $blogs as $blog ) {
-					if ( $blog == '1' ) { //get blog options from the right table (blog 1 needs a special tablename)
-						$table = $wpdb->base_prefix . 'options';
-					} else {
 						$table = $wpdb->base_prefix . $blog . '_options';
-					}
 
 					if ( is_array( $options['excluded'] ) ) { //get array of excluded blog id's
 						$excluded = $options['excluded'];
-					} else {
+					} else if (isset($options['excluded'])) {
 						$excluded = unserialize( $options['excluded'] );
+					} else {
+    					$excluded = array();
 					}
 
 					$sitedetails = $wpdb->get_results( 'SELECT option_value FROM `' . $table . '` WHERE option_name IN (\'siteurl\',\'blogname\',\'blogdescription\') ORDER BY option_name DESC' ); //get blog details

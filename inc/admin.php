@@ -149,17 +149,15 @@ if ( ! class_exists( 'mssls_admin' ) ) {
 							if ( $blogs ) {
 
 								foreach ( $blogs as $blog ) {
-									if ( $blog == '1' ) { //set correct table for primary blog
-										$table = $wpdb->base_prefix . 'options';
-									} else {
 										$table = $wpdb->base_prefix . $blog . '_options';
-									}
 
 									if ( is_array( $options['excluded'] ) ) { //get array of excluded blog id's
 										$excluded = $options['excluded'];
-									} else {
-										$excluded = unserialize( $options['excluded'] );
-									}
+									} else if (isset($options['excluded'])) {
+                                        $excluded = unserialize( $options['excluded'] );
+					                } else {
+                                        $excluded = array();
+					                }
 
 									if ( is_array( $excluded ) && in_array( $blog, $excluded ) ) { //to check or not to check
 										$checked = "checked";
