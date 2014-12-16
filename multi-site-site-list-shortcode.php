@@ -3,12 +3,12 @@
 	Plugin Name: Multi-Site Site List Shortcode
 	Plugin URI: http://wordpress.org/plugins/multi-site-site-list-shortcode/
 	Description: Displays the site list with a shortcode for network installations.
-	Version: 5.5
+	Version: 5.5.1
 	Domain Path: /languages
 	Author: iThemes
-	Author URI: http://ithemes.com
+	Author URI: https://ithemes.com/
 	License: GPLv2
-	Copyright 2014  iThemes  (email : updates@ithemes.com)
+	Copyright 2014  iThemes  (email : info@ithemes.com)
 */
 
 //load the text domain
@@ -21,7 +21,7 @@ if ( ! class_exists( 'ithemes_mssls' ) ) {
 
 	class ithemes_mssls extends iThemes {
 
-		public $pluginversion = '5.5'; //current plugin version
+		public $pluginversion = '5.5.1'; //current plugin version
 
 		//important plugin information
 		public $hook            = 'multi_site_site_list_shortcode';

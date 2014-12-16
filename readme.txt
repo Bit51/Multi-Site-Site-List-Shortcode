@@ -1,11 +1,11 @@
 
 === Multi-Site Site List Shortcode ===
 Contributors: ithemes, ChrisWiegman
-Donate link: http://bit51.com/software/multi-site-site-list-shortcode/
+Donate link: https://www.ithemes.com/
 Tags: Multisite, index, site list
-Requires at least: 3.0
-Tested up to: 3.8.1
-Stable tag: 5.5
+Requires at least: 4.0
+Tested up to: 4.1
+Stable tag: 5.5.1
 
 
 == License ==  
@@ -33,6 +33,9 @@ Note: This plugin may only be configured from the parent site (blog 1) for secur
 
 
 == Changelog ==
+
+= 5.5.1 =
+* Updated for WordPress 4.1. Thanks to <a href="https://twitter.com/cdchase">C. Daniel Chase</a> for the patch!
 
 = 5.4.4 =
 * Removed unneeded meta box on settings page
